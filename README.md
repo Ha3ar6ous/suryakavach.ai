@@ -1,67 +1,88 @@
-# suryakavach.ai — Climate Intelligence & Heatwave Early Warning System
+# Full-Stack Application: SuryaKavach
 
-> Predict extreme heat. Protect vulnerable cities.
+This repository contains a full-stack web application with a React (Vite) frontend and a Node.js/Express backend connected to a MongoDB database.
 
-suryakavach.ai is a climate-intelligence platform for tracking heat risk, validating AI forecasts against ground observations, and delivering practical safety guidance. It brings together IMD-aligned climate context, IoT Automated Weather Station (AWS) telemetry, AI heatwave intelligence, and stakeholder-specific LLM advisories.
+## Project Structure
 
-## Why it matters
+- **`suryakavach.ai/`** (Frontend): The React application built with Vite and Tailwind CSS.
+- **`server/`** (Backend): The Node.js Express server that provides the API and connects to MongoDB Cloud.
 
-Extreme heat events are becoming more frequent and severe across India. Localized, real-time information is essential for helping communities, workers, health authorities, and emergency teams act before heat stress becomes a medical crisis.
+---
 
-## Research context
+## 🛠️ How to Run Locally
 
-The application is designed around academic and research collaboration frameworks aligned with the India Meteorological Department (IMD), IoT AWS deployments, and applied AI/Data Science research. AWS observations provide the localized ground truth needed to responsibly validate forecasts.
+To run the full application locally, you will need to start both the backend server and the frontend development server in two separate terminal windows.
 
-## Five-layer system
+### 1. Start the Backend (Terminal 1)
 
-1. **Data Acquisition** — IMD historical climate data plus real-time IoT AWS observations.
-2. **Data Analytics** — Spatio-temporal analysis, segmentation, seasonal trends, and hotspot detection.
-3. **AI Heatwave Intelligence** — Maximum-temperature forecasting, early warnings, and severity classification.
-4. **Forecast Validation** — AWS ground-truth comparison and forecast-deviation monitoring.
-5. **Decision Support** — LLM advisories and response portals for citizens, workers, vulnerable groups, and health agencies.
+1. Navigate to the server directory:
+   ```bash
+   cd server
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file in the `server` directory (if not already present) and add your MongoDB Connection String:
+   ```env
+   MONGO_URI=your_mongodb_connection_string_here
+   PORT=5000
+   ```
+4. Start the server:
+   ```bash
+   node server.js
+   ```
+   *You should see a message indicating the server is running on port 5000 and MongoDB is connected.*
 
-## Application modules
+### 2. Start the Frontend (Terminal 2)
 
-- Live heat-risk dashboard with city search, forecast/ground-truth trend charts, severity distribution, and peak-temperature comparisons.
-- Stakeholder-specific AI advisory center with vulnerability radar chart and work-rest cycle calculator.
-- Emergency cooling-center and hospital directory with occupancy, amenities, filters, and first-aid guidance.
-- Crowd-sourced incident reporting network with category distribution and community trend charts.
+1. Navigate to the frontend directory:
+   ```bash
+   cd suryakavach.ai
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+4. Open the local URL provided by Vite (usually `http://localhost:5173`) in your browser.
 
-## Technical stack
+> **Note:** The frontend `vite.config.ts` is configured to automatically proxy requests starting with `/api` to `http://localhost:5000`, so no CORS configuration is needed for local development!
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- Recharts
-- Lucide React
-- React Router DOM
+---
 
-## Local setup
+## 🚀 How to Deploy
 
-```bash
-npm install
-npm run dev
-```
+When deploying a split frontend/backend application, it is easiest to deploy them as two separate services.
 
-Create a production build with:
+### 1. Deploying the Backend (e.g., Render, Railway, Heroku)
+- Create a new Web Service on your chosen platform.
+- Connect your GitHub repository and set the **Root Directory** to `server`.
+- **Build Command:** `npm install`
+- **Start Command:** `node server.js`
+- **Environment Variables:** Be sure to add your `MONGO_URI` and any other secrets in the platform's dashboard.
 
-```bash
-npm run build
-```
+### 2. Deploying the Frontend (e.g., Vercel, Netlify, Cloudflare Pages)
+- Create a new project/site on your chosen platform.
+- Connect your GitHub repository and set the **Root Directory** to `suryakavach.ai`.
+- **Framework Preset:** Vite (or React)
+- **Build Command:** `npm run build`
+- **Publish Directory:** `dist`
 
-## Folder structure
+### 🔗 Connecting Frontend to Backend in Production
+In local development, Vite proxies the `/api` calls. In production, this proxy doesn't exist. You will need to make sure your frontend knows the URL of your deployed backend.
 
-```text
-suryakavach-ai/
-├── src/
-│   ├── components/layout/   # Navbar and footer
-│   ├── data/               # Climate, advisory, shelter, and report datasets
-│   ├── pages/              # Routed application pages
-│   ├── types/              # Shared TypeScript models
-│   ├── utils/              # Theme utilities
-│   ├── App.tsx
-│   └── index.css
-├── package.json
-└── README.md
-```
+To do this:
+1. In your frontend code, replace relative API calls (like `fetch('/api/data')`) with full URLs in production.
+2. A common pattern is to create a `.env` file in the frontend (`suryakavach.ai/.env`) with:
+   ```env
+   VITE_API_URL=https://your-deployed-backend-url.com
+   ```
+3. Then update your fetch calls to use it:
+   ```javascript
+   const API_URL = import.meta.env.VITE_API_URL || '';
+   fetch(`${API_URL}/api/data`)
+   ```
