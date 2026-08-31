@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-[#FBFBF9] text-slate-900 font-sans flex flex-col justify-between">
+      <div className="min-h-screen bg-[#FBFBF9] text-slate-900 font-sans flex flex-col justify-between overflow-x-hidden">
         {backendMsg && <div className="bg-blue-600 text-white text-center py-2 text-sm font-semibold">Backend Connected: {backendMsg}</div>}
         <Navbar />
         <main className="flex-grow">
