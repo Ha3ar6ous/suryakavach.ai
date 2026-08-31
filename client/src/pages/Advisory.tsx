@@ -101,8 +101,9 @@ export default function Advisory() {
         <div className="flex items-center gap-3">
           <BrainCircuit className="text-blue-600" size={31} />
           <div>
-            <p className="text-sm font-semibold text-blue-700">
+            <p className="text-sm font-semibold text-blue-700 flex items-center gap-2">
               Decision support
+              <span className="bg-slate-900 text-white text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">⚡ Powered by Groq AI</span>
             </p>
             <h1 className="text-3xl font-black">AI Advisory Center</h1>
             <p className="mt-1 text-slate-600">

@@ -54,10 +54,10 @@ export default function AiAssistant() {
                 {msg.content}
               </div>
             ))}
-            {loading && <div className="text-xs text-slate-500 self-start italic">Surya is typing...</div>}
+            {loading && <div className="text-xs text-slate-500 self-start italic flex items-center gap-1"><span className="animate-pulse">Surya is typing</span></div>}
             <div ref={messagesEndRef} />
           </div>
-          <div className="p-3 border-t flex gap-2 bg-white rounded-b-lg">
+          <div className="p-3 border-t flex gap-2 bg-white">
             <input 
               type="text" 
               value={input} 
@@ -70,13 +70,17 @@ export default function AiAssistant() {
               <Send size={16} />
             </button>
           </div>
+          <div className="bg-slate-100 text-[10px] text-center py-1 text-slate-500 rounded-b-lg border-t">
+            ⚡ Powered by Groq AI
+          </div>
         </div>
       ) : (
         <button 
           onClick={() => setIsOpen(true)}
-          className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-all flex items-center justify-center"
+          className="bg-blue-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-all flex items-center justify-center gap-2 group animate-bounce hover:animate-none"
         >
-          <MessageCircle size={28} />
+          <MessageCircle size={24} />
+          <span className="font-semibold">Ask AI</span>
         </button>
       )}
     </div>
