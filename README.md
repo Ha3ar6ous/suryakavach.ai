@@ -12,7 +12,7 @@ The project is built as a full-stack modern application powered by high-speed AI
 
 - **Frontend (`client/`)**: React, TypeScript, Vite, Tailwind CSS, Recharts.
 - **Backend (`server/`)**: Node.js, Express.js, MongoDB Cloud.
-- **AI Engine**: Groq API (LLaMA-3) for real-time situational awareness and an intelligent chat assistant.
+- **AI Engine**: Groq API (Qwen 3.8 27B) for real-time situational awareness and an intelligent chat assistant.
 
 ## Folder Structure
 
