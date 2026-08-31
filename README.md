@@ -1,88 +1,121 @@
-# Full-Stack Application: SuryaKavach
+# suryakavach.ai — Climate Intelligence & Heatwave Early Warning System
 
-This repository contains a full-stack web application with a React (Vite) frontend and a Node.js/Express backend connected to a MongoDB database.
+> Predict extreme heat. Protect vulnerable cities.
 
-## Project Structure
+suryakavach.ai is a full-stack climate-intelligence platform for tracking heat risk, validating AI forecasts against ground observations, and delivering practical safety guidance. It brings together IMD-aligned climate context, IoT Automated Weather Station (AWS) telemetry, AI heatwave intelligence, and stakeholder-specific LLM advisories.
 
-- **`suryakavach.ai/`** (Frontend): The React application built with Vite and Tailwind CSS.
-- **`server/`** (Backend): The Node.js Express server that provides the API and connects to MongoDB Cloud.
+## Why it matters
+Extreme heat events are becoming more frequent and severe across India. Localized, real-time information is essential for helping communities, workers, health authorities, and emergency teams act before heat stress becomes a medical crisis.
 
----
+## Technical Architecture
+The project is built as a full-stack modern application powered by high-speed AI inference (Groq):
 
-## 🛠️ How to Run Locally
+- **Frontend (`client/`)**: React, TypeScript, Vite, Tailwind CSS, Recharts.
+- **Backend (`server/`)**: Node.js, Express.js, MongoDB Cloud.
+- **AI Engine**: Groq API (LLaMA-3) for real-time situational awareness and an intelligent chat assistant.
 
-To run the full application locally, you will need to start both the backend server and the frontend development server in two separate terminal windows.
+## Folder Structure
 
-### 1. Start the Backend (Terminal 1)
-
-1. Navigate to the server directory:
-   ```bash
-   cd server
-   ```
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the `server` directory (if not already present) and add your MongoDB Connection String:
-   ```env
-   MONGO_URI=your_mongodb_connection_string_here
-   PORT=5000
-   ```
-4. Start the server:
-   ```bash
-   node server.js
-   ```
-   *You should see a message indicating the server is running on port 5000 and MongoDB is connected.*
-
-### 2. Start the Frontend (Terminal 2)
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd suryakavach.ai
-   ```
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite development server:
-   ```bash
-   npm run dev
-   ```
-4. Open the local URL provided by Vite (usually `http://localhost:5173`) in your browser.
-
-> **Note:** The frontend `vite.config.ts` is configured to automatically proxy requests starting with `/api` to `http://localhost:5000`, so no CORS configuration is needed for local development!
+```text
+Projectmain/
+├── client/               # React (Vite) Frontend Application
+│   ├── src/
+│   │   ├── components/   # UI and AiAssistant components
+│   │   ├── data/         # Mock datasets
+│   │   ├── pages/        # Dashboard, Advisory, Emergency, Reports
+│   │   └── types/        # TypeScript interfaces
+│   └── package.json
+├── server/               # Node.js (Express) Backend Application
+│   ├── models/           # MongoDB schemas (Report, Advisory, Sample)
+│   ├── routes/           # REST API routes (api.js, reports.js, advisories.js, ai.js)
+│   ├── server.js         # Express entry point
+│   └── package.json
+└── README.md             # This documentation
+```
 
 ---
 
-## 🚀 How to Deploy
+## 🛠️ Local Setup Instructions
 
-When deploying a split frontend/backend application, it is easiest to deploy them as two separate services.
+To run the full application locally, you need to start both the backend server and the frontend development server.
 
-### 1. Deploying the Backend (e.g., Render, Railway, Heroku)
-- Create a new Web Service on your chosen platform.
-- Connect your GitHub repository and set the **Root Directory** to `server`.
-- **Build Command:** `npm install`
-- **Start Command:** `node server.js`
-- **Environment Variables:** Be sure to add your `MONGO_URI` and any other secrets in the platform's dashboard.
+### 1. Prerequisites
+- Node.js (v18+)
+- A MongoDB Cloud Database Connection String
+- A Groq API Key (for the AI Assistant)
 
-### 2. Deploying the Frontend (e.g., Vercel, Netlify, Cloudflare Pages)
-- Create a new project/site on your chosen platform.
-- Connect your GitHub repository and set the **Root Directory** to `suryakavach.ai`.
-- **Framework Preset:** Vite (or React)
-- **Build Command:** `npm run build`
-- **Publish Directory:** `dist`
+### 2. Start the Backend (Terminal 1)
+```bash
+cd server
+npm install
+```
+Create a `.env` file in the `server` directory and add your secret keys:
+```env
+MONGO_URI=your_mongodb_connection_string
+GROQ_API_KEY=your_groq_api_key
+PORT=5000
+```
+Start the backend:
+```bash
+node server.js
+```
+*You should see "MongoDB connected successfully" and "Server is running on port 5000".*
 
-### 🔗 Connecting Frontend to Backend in Production
-In local development, Vite proxies the `/api` calls. In production, this proxy doesn't exist. You will need to make sure your frontend knows the URL of your deployed backend.
+### 3. Start the Frontend (Terminal 2)
+```bash
+cd client
+npm install
+npm run dev
+```
+*The Vite development server will start on `http://localhost:5173`. API requests to `/api` are automatically proxied to the backend via `vite.config.ts`.*
 
-To do this:
-1. In your frontend code, replace relative API calls (like `fetch('/api/data')`) with full URLs in production.
-2. A common pattern is to create a `.env` file in the frontend (`suryakavach.ai/.env`) with:
-   ```env
-   VITE_API_URL=https://your-deployed-backend-url.com
+---
+
+## 🚀 Deployment Guide
+
+We recommend deploying the **Frontend to Vercel** and the **Backend to Render**.
+
+### Step 1: Deploy Backend to Render
+1. Create a free account on [Render](https://render.com/).
+2. Click **New +** and select **Web Service**.
+3. Connect your GitHub repository.
+4. **Settings:**
+   - **Root Directory:** `server`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+5. **Environment Variables (Important!):**
+   - Add `MONGO_URI` with your MongoDB connection string.
+   - Add `GROQ_API_KEY` with your Groq API key.
+6. Click **Deploy** and copy the provided Render URL once successful (e.g., `https://suryakavach-api.onrender.com`).
+
+### Step 2: Configure Frontend for Production
+In development, Vite proxies the `/api` calls. In production, Vercel needs to know how to route these requests to your Render backend.
+
+1. Navigate to the `client/` folder.
+2. Create a file named `vercel.json`.
+3. Add the following configuration, replacing the destination URL with your **actual Render URL**:
+   ```json
+   {
+     "rewrites": [
+       {
+         "source": "/api/(.*)",
+         "destination": "https://suryakavach-api.onrender.com/api/$1"
+       },
+       {
+         "source": "/(.*)",
+         "destination": "/index.html"
+       }
+     ]
+   }
    ```
-3. Then update your fetch calls to use it:
-   ```javascript
-   const API_URL = import.meta.env.VITE_API_URL || '';
-   fetch(`${API_URL}/api/data`)
-   ```
+*(This ensures all `/api/...` calls go to your backend, and all other routes serve your React app).*
+
+### Step 3: Deploy Frontend to Vercel
+1. Create a free account on [Vercel](https://vercel.com/).
+2. Click **Add New -> Project** and select your GitHub repository.
+3. **Settings:**
+   - **Root Directory:** Click Edit and select `client`
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+4. Click **Deploy**. Vercel will automatically build the site and deploy it globally!
