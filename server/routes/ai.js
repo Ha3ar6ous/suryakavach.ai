@@ -12,7 +12,7 @@ router.post('/chat', async (req, res) => {
         { role: "system", content: "You are Surya, a helpful AI assistant for the SuryaKavach disaster and emergency management platform. Keep your answers concise, helpful, and focused on safety and situational awareness." },
         { role: "user", content: message }
       ],
-      model: "llama3-8b-8192", 
+      model: "llama-3.1-8b-instant", 
     });
 
     res.json({ reply: chatCompletion.choices[0]?.message?.content || "No response generated." });
