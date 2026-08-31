@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
 
 const reportSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  location: { type: String, required: true },
-  severity: { type: String, enum: ['Low', 'Medium', 'High', 'Critical'], default: 'Medium' },
-  status: { type: String, enum: ['Open', 'Investigating', 'Resolved'], default: 'Open' },
-  createdAt: { type: Date, default: Date.now }
+  city: { type: String, required: true },
+  severity: { type: String, enum: ['Normal', 'Moderate', 'Severe', 'Extreme'], default: 'Moderate' },
+  symptoms: [{ type: String }],
+  awsVerified: { type: Boolean, default: false },
+  stressScore: { type: Number, default: 50 },
+  timestamp: { type: Date, default: Date.now }
+});
+
+// Transform output to match frontend `id` expectation
+reportSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    ret.id = ret._id;
+    delete ret._id;
+  }
 });
 
 module.exports = mongoose.model('Report', reportSchema);
