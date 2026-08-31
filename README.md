@@ -192,3 +192,7 @@ Because Vite's local `/api` proxy doesn't work in production, Vercel needs to kn
    - **Build Command:** `npm run build`
    - **Output Directory:** `dist`
 4. Click **Deploy**. Vercel will build the frontend and your app will be live and fully connected to your backend!
+
+
+Deployed server : https://suryakavach-ai.onrender.com
+Deployed client : https://suryakavachdotai.vercel.app/
