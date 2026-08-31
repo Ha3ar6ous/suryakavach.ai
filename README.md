@@ -18,7 +18,7 @@
 
 ---
 
-## 📖 Table of Contents
+##  Table of Contents
 - [About the Project](#-about-the-project)
 - [Key Features](#-key-features)
 - [Tech Stack](#-tech-stack)
@@ -29,7 +29,7 @@
 
 ---
 
-## 🌍 About the Project
+##  About the Project
 
 **SuryaKavach.ai** is a full-stack climate-intelligence platform designed to track heat risks, validate AI forecasts against ground observations, and deliver actionable safety guidance.
 
@@ -39,17 +39,17 @@ This platform brings together IMD-aligned climate context, IoT Automated Weather
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-- 🌡️ **Live Heat-Risk Dashboard**: City search, forecast/ground-truth trend charts, severity distribution, and peak-temperature comparisons.
-- 🤖 **AI Chat Assistant (Surya)**: An intelligent floating widget powered by Groq (Qwen-27B) providing real-time situational awareness and answering heat-safety queries.
-- 📢 **Dynamic AI Advisory Center**: Automatically generates vulnerability profiles and targeted protocols for Citizens, Workers, the Elderly, and Health Authorities.
-- 🚨 **Community Incident Reporting**: Crowd-sourced reporting network for heat stress, tracking symptoms and stress scores across regions.
-- ⏱️ **Work-Rest Cycle Calculator**: Dynamically computes shaded recovery intervals per hour based on temperature and job intensity.
+-  **Live Heat-Risk Dashboard**: City search, forecast/ground-truth trend charts, severity distribution, and peak-temperature comparisons.
+-  **AI Chat Assistant (Surya)**: An intelligent floating widget powered by Groq (Qwen-27B) providing real-time situational awareness and answering heat-safety queries.
+-  **Dynamic AI Advisory Center**: Automatically generates vulnerability profiles and targeted protocols for Citizens, Workers, the Elderly, and Health Authorities.
+-  **Community Incident Reporting**: Crowd-sourced reporting network for heat stress, tracking symptoms and stress scores across regions.
+- ⏱ **Work-Rest Cycle Calculator**: Dynamically computes shaded recovery intervals per hour based on temperature and job intensity.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend (`client/`)
 - **Framework:** React 19 + TypeScript + Vite
@@ -66,7 +66,7 @@ This platform brings together IMD-aligned climate context, IoT Automated Weather
 
 ---
 
-## 📡 API Documentation
+##  API Documentation
 
 The Express backend provides the following RESTful endpoints:
 
@@ -100,7 +100,7 @@ The Express backend provides the following RESTful endpoints:
 
 ---
 
-## 🔐 Environment Variables
+##  Environment Variables
 
 Create a `.env` file in the **`server/`** directory with the following keys before running the backend:
 
@@ -112,7 +112,7 @@ Create a `.env` file in the **`server/`** directory with the following keys befo
 
 ---
 
-## ⚙️ Getting Started (Local Setup)
+##  Getting Started (Local Setup)
 
 To run the application locally, you will need to start both the **Frontend** and **Backend** servers simultaneously in two separate terminals.
 
@@ -146,7 +146,7 @@ npm run dev
 
 ---
 
-## 🚀 Deployment Guide
+##  Deployment Guide
 
 We recommend a split deployment strategy: **Vercel** for the React frontend and **Render** for the Node.js backend.
 
